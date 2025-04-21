@@ -2,9 +2,13 @@ package mvc01;
 
 public class VistaCalculadora extends javax.swing.JFrame {
 
-    public VistaCalculadora() {
+    private Operacion model;  // Aquí guardamos el modelo
+
+    public VistaCalculadora(Operacion m) {  // Constructor que recibe el modelo
+        this.model = m;
         initComponents();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -110,7 +114,9 @@ public class VistaCalculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_SelelectOpeActionPerformed
 
     private void bcalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcalcularActionPerformed
-        // TODO add your handling code here:
+        // Llamamos a la entrada y salida cuando el botón es presionado
+        entrada();
+        salida();
     }//GEN-LAST:event_bcalcularActionPerformed
 
 
@@ -126,17 +132,19 @@ public class VistaCalculadora extends javax.swing.JFrame {
     public javax.swing.JTextField txtRes;
     // End of variables declaration//GEN-END:variables
 
-public void entrada() {
-    String a = txtOp1.getText();
-    String b = txtOp2.getText();
-    Validacion v = new Validacion();
-    if (v.checkDouble(a) && v.checkDouble(b)) {
-        model.setOp1(Double.parseDouble(a));
-        model.setOp2(Double.parseDouble(b));
+    // Método para recibir los valores de entrada y guardarlos en el modelo
+    public void entrada() {
+        String a = txtOp1.getText();
+        String b = txtOp2.getText();
+        Validacion v = new Validacion();
+        if (v.checkDouble(a) && v.checkDouble(b)) {
+            model.setOp1(Double.parseDouble(a));
+            model.setOp2(Double.parseDouble(b));
+        }
     }
-}
 
-public void salida() {
-    txtRes.setText(String.valueOf(model.getRes()));
-}
+    // Método para mostrar el resultado en el campo de texto
+    public void salida() {
+        txtRes.setText(String.valueOf(model.getRes()));
+    }
 }
